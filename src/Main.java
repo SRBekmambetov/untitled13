@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,9 @@ public class Main {
         countryList.add(country2);
         countryList.add(country3);
 
-        List<People> listPeople1 = countryList.stream().forEach(p -> p.getPeopleList().stream().filter(q -> q.getAge() > 28).collect(Collectors.toList()));
+        List<People> listPeople1 = countryList.stream()
+                .flatMap(country -> country.getPeopleList().stream())
+                .filter(x -> x.getAge() > 28).collect(Collectors.toList());
+        System.out.println(listPeople1);
     }
 }
